@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Einav David — ServiceNow Platform Manager</title>
+  <meta name="description" content="Einav David — ServiceNow Platform Manager, Project & Product Lead, Digital Transformation, MBA. Based in Kfar Saba, Israel.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f6f2;
+      --surface: #ffffff;
+      --text: #1c1f26;
+      --muted: #5d6470;
+      --line: #e3e1da;
+      --accent: #0f6b5c;
+      --accent-soft: #e2f0ec;
+      --shadow: 0 1px 2px rgba(20, 24, 31, .04), 0 8px 24px rgba(20, 24, 31, .05);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #12151a;
+        --surface: #1a1e25;
+        --text: #e9eaec;
+        --muted: #a0a6b0;
+        --line: #2a303a;
+        --accent: #5cc4ae;
+        --accent-soft: #1b3330;
+        --shadow: none;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #12151a;
+      --surface: #1a1e25;
+      --text: #e9eaec;
+      --muted: #a0a6b0;
+      --line: #2a303a;
+      --accent: #5cc4ae;
+      --accent-soft: #1b3330;
+      --shadow: none;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 400 16px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+    .brand { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 18px; color: var(--text); text-decoration: none; white-space: nowrap; }
+    .links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+    .links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .links a:hover { color: var(--text); }
+
+    /* Hero */
+    header.hero { padding: 88px 0 64px; }
+    .eyebrow { color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 16px; }
+    h1 {
+      font-family: Fraunces, Georgia, serif; font-weight: 600;
+      font-size: clamp(40px, 7vw, 64px); line-height: 1.05; letter-spacing: -.02em; margin: 0 0 20px;
+    }
+    .tagline { font-size: clamp(18px, 2.4vw, 21px); color: var(--muted); max-width: 640px; margin: 0 0 28px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 999px;
+      background: var(--surface); border: 1px solid var(--line);
+      font-size: 14px; color: var(--muted);
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; border-radius: 10px;
+      background: var(--accent); color: var(--bg);
+      font-weight: 600; font-size: 15px; text-decoration: none;
+    }
+    .btn:hover { filter: brightness(1.08); }
+
+    /* Stats */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; box-shadow: var(--shadow); }
+    .stat b { display: block; font-family: Fraunces, Georgia, serif; font-size: 32px; font-weight: 600; line-height: 1.1; color: var(--accent); }
+    .stat span { font-size: 14px; color: var(--muted); }
+
+    /* Sections */
+    section { padding: 56px 0; border-top: 1px solid var(--line); }
+    h2 { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 30px; letter-spacing: -.01em; margin: 0 0 28px; }
+    .about p { font-size: 18px; max-width: 700px; margin: 0 0 16px; }
+
+    /* Experience timeline */
+    .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+    .timeline::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
+    .role { position: relative; padding-left: 36px; margin-bottom: 36px; }
+    .role:last-child { margin-bottom: 0; }
+    .role::before {
+      content: ""; position: absolute; left: 0; top: 6px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--bg); border: 3px solid var(--accent);
+    }
+    .role.current::before { background: var(--accent); }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow); }
+    .role-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; align-items: baseline; }
+    .role h3 { font-size: 18px; font-weight: 600; margin: 0; }
+    .dates { font-size: 14px; color: var(--muted); white-space: nowrap; }
+    .company { color: var(--accent); font-weight: 500; margin: 2px 0 14px; font-size: 15px; }
+    .company small { color: var(--muted); font-weight: 400; }
+    .role ul { margin: 0; padding-left: 18px; }
+    .role li { margin-bottom: 8px; color: var(--text); }
+    .role li:last-child { margin-bottom: 0; }
+    .role li strong { font-weight: 600; }
+    .sub { margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--line); }
+
+    /* Skills */
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill { padding: 9px 16px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; font-size: 15px; }
+
+    /* Education */
+    .edu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .edu h3 { font-size: 17px; margin: 0 0 4px; }
+    .edu p { margin: 0; color: var(--muted); font-size: 15px; }
+    .edu .dates { display: block; margin-top: 10px; }
+
+    /* Contact */
+    .contact p { font-size: 18px; max-width: 600px; margin: 0 0 24px; color: var(--muted); }
+    footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+
+    @media (max-width: 640px) {
+      .links { display: none; }
+      header.hero { padding: 56px 0 40px; }
+      .stats, .edu { grid-template-columns: 1fr; }
+      .card { padding: 18px; }
+      .role { padding-left: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap">
+      <a class="brand" href="#top">Einav David</a>
+      <ul class="links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="wrap">
+        <p class="eyebrow">ServiceNow · Product · Digital Transformation</p>
+        <h1>Einav David</h1>
+        <p class="tagline">ServiceNow Platform Manager and Project &amp; Product Lead. For close to 20 years I have turned business needs into enterprise platforms that people rely on.</p>
+        <div class="meta">
+          <span class="chip">📍 Kfar Saba, Israel</span>
+          <span class="chip">💼 Palo Alto Networks</span>
+          <span class="chip">🎓 MBA</span>
+        </div>
+        <a class="btn" href="https://www.linkedin.com/in/einav-david-7b9911208/" target="_blank" rel="noopener">Connect on LinkedIn →</a>
+
+        <div class="stats">
+          <div class="stat"><b>18+</b><span>years in enterprise IT</span></div>
+          <div class="stat"><b>10+</b><span>years on ServiceNow &amp; ITSM</span></div>
+          <div class="stat"><b>4</b><span>leadership roles across 4 companies</span></div>
+        </div>
+      </div>
+    </header>
+
+    <section id="about" class="about">
+      <div class="wrap">
+        <h2>About</h2>
+        <p>I lead the ServiceNow platform at Palo Alto Networks, following the CyberArk acquisition. I own the platform roadmap and run a cross-functional team of developers, project managers and system analysts, keeping the platform aligned with executive priorities.</p>
+        <p>I started out leading an IT operations team, then spent years as a systems analyst and IT project manager, and later worked as a Product Owner running Agile delivery. Across all of these roles I have bridged business and technology, which means good governance, clear specifications and releases that ship without disruption.</p>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="wrap">
+        <h2>Experience</h2>
+        <ol class="timeline">
+          <li class="role current">
+            <div class="card">
+              <div class="role-head">
+                <h3>ServiceNow Platform Manager / Team Leader</h3>
+                <span class="dates">Sep 2022 – Present</span>
+              </div>
+              <p class="company">Palo Alto Networks <small>· CyberArk (acquired by Palo Alto Networks) · Israel</small></p>
+              <ul>
+                <li><strong>Platform Strategy &amp; Roadmap:</strong> Own the end-to-end ServiceNow roadmap, aligning platform capabilities with executive business priorities.</li>
+                <li><strong>Team Leadership &amp; Velocity:</strong> Lead and mentor a cross-functional team of developers, project managers and system analysts, and set delivery velocity and SLA benchmarks.</li>
+                <li><strong>Governance &amp; Architecture:</strong> Enforce platform governance, architectural standards and security controls to keep the platform highly available and compliant.</li>
+                <li><strong>Digital Transformation:</strong> Partner with executive stakeholders to drive platform adoption, automate critical workflows and run upgrade cycles with zero business disruption.</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="role">
+            <div class="card">
+              <div class="role-head">
+                <h3>Product Owner</h3>
+                <span class="dates">Jan 2019 – Sep 2022</span>
+              </div>
+              <p class="company">Amdocs <small>· Israel</small></p>
+              <ul>
+                <li><strong>End-to-End Product Management:</strong> Managed full product lifecycles with Agile, from concept to delivery, including requirements gathering, prioritization, timelines and budget.</li>
+                <li><strong>Scrum Leadership:</strong> Led an 8-person Scrum team and ran demos, design reviews and planning sessions to deliver as much customer value as possible.</li>
+                <li><strong>Customer Advisory &amp; Requirements:</strong> Translated business needs into functional and technical specifications, and advised clients on best practices and reusing components.</li>
+                <li><strong>Portfolio Ownership:</strong> Managed several projects at once while staying within specifications and budget limits.</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="role">
+            <div class="card">
+              <div class="role-head">
+                <h3>Comverse</h3>
+                <span class="dates">Oct 2007 – Oct 2018 · 11 yrs</span>
+              </div>
+              <p class="company">Israel</p>
+
+              <div class="role-head">
+                <h3>IT Project Manager / Systems Analyst</h3>
+                <span class="dates">Oct 2011 – Oct 2018</span>
+              </div>
+              <ul style="margin-top:12px">
+                <li><strong>Platform Implementation &amp; Support:</strong> Implemented and maintained the enterprise ServiceNow platform and BMC Remedy ITSM, including data analysis, complex bug fixing and ongoing performance tuning.</li>
+                <li><strong>Functional Design &amp; Architecture:</strong> Wrote detailed functional designs and technical specifications for development and QA teams, connecting business needs with technical delivery.</li>
+                <li><strong>Full-Lifecycle Release Management:</strong> Planned and governed releases from start to finish: gathering requirements, defining solutions, tracking development, guiding QA and ensuring smooth production launches.</li>
+              </ul>
+
+              <div class="sub">
+                <div class="role-head">
+                  <h3>Telephony Help Desk Team Lead &amp; Project Manager</h3>
+                  <span class="dates">Oct 2007 – Oct 2011</span>
+                </div>
+                <ul style="margin-top:12px">
+                  <li><strong>Technical Team Leadership:</strong> Led the corporate IT operations team and kept technical support, employee training and day-to-day operations running smoothly across global offices.</li>
+                  <li><strong>Infrastructure &amp; Telecom Management:</strong> Managed corporate IT infrastructure and telecom operations, including global telephony systems, network connectivity and cellular provider integrations.</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <h2>Skills</h2>
+        <div class="skills">
+          <span class="skill">ServiceNow</span>
+          <span class="skill">BMC Remedy ITSM</span>
+          <span class="skill">Platform Governance</span>
+          <span class="skill">Digital Transformation</span>
+          <span class="skill">Product Management</span>
+          <span class="skill">Release Management</span>
+          <span class="skill">Team Leadership</span>
+          <span class="skill">Agile Methodologies</span>
+          <span class="skill">Scrum</span>
+          <span class="skill">Systems Analysis</span>
+          <span class="skill">Business Analysis</span>
+          <span class="skill">Management</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="wrap">
+        <h2>Education</h2>
+        <div class="edu">
+          <div class="card">
+            <h3>The Open University of Israel</h3>
+            <p>Master of Business Administration (MBA), Business Administration and Management</p>
+            <span class="dates">2006 – 2009</span>
+          </div>
+          <div class="card">
+            <h3>Ruppin Academic Center</h3>
+            <p>BA in Behavioral Sciences</p>
+            <span class="dates">2004 – 2007</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <h2>Let's connect</h2>
+        <p>Happy to talk about ServiceNow platform strategy, product and project leadership, or digital transformation.</p>
+        <a class="btn" href="https://www.linkedin.com/in/einav-david-7b9911208/" target="_blank" rel="noopener">Message me on LinkedIn →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© 2026 Einav David</div>
+  </footer>
+</body>
+</html>
