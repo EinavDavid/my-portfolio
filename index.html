@@ -7,321 +7,640 @@
   <meta name="description" content="Einav David — ServiceNow Platform Manager, Project & Product Lead, Digital Transformation, MBA. Based in Kfar Saba, Israel.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f7f6f2;
+      --bg: #ffffff;
+      --bg-soft: #f7f7f7;
       --surface: #ffffff;
-      --text: #1c1f26;
-      --muted: #5d6470;
-      --line: #e3e1da;
-      --accent: #0f6b5c;
-      --accent-soft: #e2f0ec;
-      --shadow: 0 1px 2px rgba(20, 24, 31, .04), 0 8px 24px rgba(20, 24, 31, .05);
+      --text: #222222;
+      --muted: #6a6a6a;
+      --line: #dddddd;
+      --line-soft: #ebebeb;
+      --accent: #e31c5f;
+      --accent-2: #d70466;
+      --accent-grad: linear-gradient(90deg, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+      --card-shadow: 0 6px 16px rgba(0, 0, 0, .12);
+      --soft-shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 4px 12px rgba(0, 0, 0, .05);
     }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
-        --bg: #12151a;
-        --surface: #1a1e25;
-        --text: #e9eaec;
-        --muted: #a0a6b0;
-        --line: #2a303a;
-        --accent: #5cc4ae;
-        --accent-soft: #1b3330;
-        --shadow: none;
+        --bg: #121212;
+        --bg-soft: #1b1b1b;
+        --surface: #1e1e1e;
+        --text: #f2f2f2;
+        --muted: #a8a8a8;
+        --line: #3a3a3a;
+        --line-soft: #2c2c2c;
+        --accent: #ff4f7b;
+        --accent-2: #ff3d6e;
+        --card-shadow: 0 6px 16px rgba(0, 0, 0, .5);
+        --soft-shadow: 0 1px 2px rgba(0, 0, 0, .4);
       }
     }
     :root[data-theme="dark"] {
-      --bg: #12151a;
-      --surface: #1a1e25;
-      --text: #e9eaec;
-      --muted: #a0a6b0;
-      --line: #2a303a;
-      --accent: #5cc4ae;
-      --accent-soft: #1b3330;
-      --shadow: none;
+      --bg: #121212;
+      --bg-soft: #1b1b1b;
+      --surface: #1e1e1e;
+      --text: #f2f2f2;
+      --muted: #a8a8a8;
+      --line: #3a3a3a;
+      --line-soft: #2c2c2c;
+      --accent: #ff4f7b;
+      --accent-2: #ff3d6e;
+      --card-shadow: 0 6px 16px rgba(0, 0, 0, .5);
+      --soft-shadow: 0 1px 2px rgba(0, 0, 0, .4);
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 150px; }
     body {
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font: 400 16px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+      font: 400 16px/1.6 "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-    a { color: var(--accent); }
-    .wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+    a { color: inherit; }
+    svg.i { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-    /* Nav */
-    nav {
-      position: sticky; top: 0; z-index: 10;
-      background: color-mix(in srgb, var(--bg) 88%, transparent);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--line);
+    /* Header */
+    .topbar { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line-soft); }
+    .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 80px; }
+    .logo { display: flex; align-items: center; gap: 8px; color: var(--accent); font-weight: 800; font-size: 21px; letter-spacing: -.02em; text-decoration: none; white-space: nowrap; }
+    .logo-mark { width: 32px; height: 32px; border-radius: 10px; background: var(--accent-grad); color: #fff; display: grid; place-items: center; font-size: 15px; }
+    .search {
+      display: flex; align-items: center;
+      border: 1px solid var(--line); border-radius: 999px;
+      box-shadow: var(--soft-shadow); background: var(--surface);
+      padding: 6px 6px 6px 8px;
     }
-    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
-    .brand { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 18px; color: var(--text); text-decoration: none; white-space: nowrap; }
-    .links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
-    .links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
-    .links a:hover { color: var(--text); }
-
-    /* Hero */
-    header.hero { padding: 88px 0 64px; }
-    .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
-    .avatar {
-      flex: none; width: 184px; height: 184px; border-radius: 50%;
-      object-fit: cover; border: 4px solid var(--surface);
-      box-shadow: 0 0 0 1px var(--line), var(--shadow);
+    .search a { padding: 6px 16px; font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .search a + a { border-left: 1px solid var(--line); }
+    .search a:hover { color: var(--accent); }
+    .search .go {
+      width: 34px; height: 34px; border-radius: 50%; margin-left: 4px;
+      background: var(--accent-grad); color: #fff; display: grid; place-items: center; text-decoration: none; border: 0;
     }
-    .eyebrow { color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 16px; }
-    h1 {
-      font-family: Fraunces, Georgia, serif; font-weight: 600;
-      font-size: clamp(40px, 7vw, 64px); line-height: 1.05; letter-spacing: -.02em; margin: 0 0 20px;
+    .search .go svg { width: 16px; height: 16px; stroke-width: 2.4; }
+    .profile-pill {
+      display: flex; align-items: center; gap: 10px;
+      padding: 5px 5px 5px 14px; border: 1px solid var(--line); border-radius: 999px;
+      text-decoration: none; font-size: 14px; font-weight: 600;
     }
-    .tagline { font-size: clamp(18px, 2.4vw, 21px); color: var(--muted); max-width: 640px; margin: 0 0 28px; }
-    .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
-    .chip {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 12px; border-radius: 999px;
-      background: var(--surface); border: 1px solid var(--line);
-      font-size: 14px; color: var(--muted);
+    .profile-pill:hover { box-shadow: var(--soft-shadow); }
+    .profile-pill img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+
+    /* Category tabs */
+    .cats { position: sticky; top: 80px; z-index: 15; background: var(--bg); box-shadow: 0 1px 0 var(--line-soft); }
+    .cats .wrap { display: flex; gap: 36px; overflow-x: auto; scrollbar-width: none; }
+    .cats .wrap::-webkit-scrollbar { display: none; }
+    .cat {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 14px 0 12px; border-bottom: 2px solid transparent;
+      color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 600; white-space: nowrap;
+      transition: color .15s, border-color .15s;
     }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 12px 20px; border-radius: 10px;
-      background: var(--accent); color: var(--bg);
-      font-weight: 600; font-size: 15px; text-decoration: none;
+    .cat:hover { color: var(--text); border-bottom-color: var(--line); }
+    .cat.active { color: var(--text); border-bottom-color: var(--text); }
+
+    /* Title row */
+    .title-row { padding: 32px 0 20px; }
+    h1 { font-size: clamp(26px, 4vw, 32px); font-weight: 700; letter-spacing: -.02em; line-height: 1.2; margin: 0 0 6px; }
+    .subline { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 14px; color: var(--text); }
+    .subline .dot { color: var(--muted); }
+    .subline u { text-underline-offset: 3px; font-weight: 600; }
+    .star { color: var(--accent); }
+
+    /* Photo-gallery-style hero */
+    .gallery { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 190px 190px; gap: 8px; border-radius: 16px; overflow: hidden; }
+    .tile { position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; color: #fff; overflow: hidden; }
+    .tile.main { grid-row: span 2; background: linear-gradient(135deg, #ff5a5f 0%, #e31c5f 45%, #a3125c 100%); padding: 32px; }
+    .tile.t1 { background: linear-gradient(135deg, #2a2a72 0%, #3b6bd6 100%); }
+    .tile.t2 { background: linear-gradient(135deg, #00a699 0%, #007a87 100%); }
+    .tile.t3 { background: linear-gradient(135deg, #fc642d 0%, #e0482d 100%); }
+    .tile.t4 { background: linear-gradient(135deg, #484848 0%, #222 100%); }
+    .tile::after { content: ""; position: absolute; right: -40px; top: -40px; width: 160px; height: 160px; border-radius: 50%; background: rgba(255, 255, 255, .1); }
+    .tile b { font-size: 34px; font-weight: 800; line-height: 1; letter-spacing: -.02em; }
+    .tile span { font-size: 14px; font-weight: 500; opacity: .92; margin-top: 6px; }
+    .tile.main .quote { font-size: clamp(22px, 3vw, 30px); font-weight: 700; line-height: 1.25; letter-spacing: -.01em; max-width: 420px; }
+    .tile.main .quote + span { margin-top: 14px; }
+
+    /* Two-column layout */
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 80px; padding: 40px 0 24px; }
+    .block { padding: 32px 0; border-bottom: 1px solid var(--line); }
+    .block:first-child { padding-top: 0; }
+    .block:last-child { border-bottom: 0; }
+    h2 { font-size: 22px; font-weight: 700; letter-spacing: -.01em; margin: 0 0 24px; }
+    .lead { font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+    .muted { color: var(--muted); }
+
+    /* Highlights (like listing highlights) */
+    .highlights { display: grid; gap: 24px; }
+    .hl { display: flex; gap: 22px; align-items: flex-start; }
+    .hl h3 { font-size: 16px; font-weight: 600; margin: 0 0 2px; }
+    .hl p { margin: 0; font-size: 14px; color: var(--muted); }
+
+    /* Host card */
+    .host { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    .host-card { max-width: 380px; }
+    .host-card { background: var(--surface); border-radius: 24px; box-shadow: var(--card-shadow); padding: 28px 24px; display: grid; grid-template-columns: 1fr 104px; align-items: center; gap: 12px; }
+    .host-id { text-align: center; }
+    .host-photo { position: relative; width: 104px; height: 104px; margin: 0 auto 10px; }
+    .host-photo img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+    .verified { position: absolute; right: -2px; bottom: 4px; width: 32px; height: 32px; border-radius: 50%; background: var(--accent-grad); color: #fff; display: grid; place-items: center; border: 3px solid var(--surface); }
+    .verified svg { width: 14px; height: 14px; stroke-width: 3; }
+    .host-id strong { display: block; font-size: 26px; font-weight: 800; line-height: 1.1; letter-spacing: -.02em; }
+    .host-id small { display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 13px; font-weight: 600; margin-top: 4px; }
+    .host-stats div { padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .host-stats div:last-child { border-bottom: 0; }
+    .host-stats b { display: block; font-size: 22px; font-weight: 800; line-height: 1.1; }
+    .host-stats span { font-size: 11px; font-weight: 600; }
+    .host-facts { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 12px; }
+    .host-facts li { display: flex; gap: 12px; align-items: center; font-size: 15px; }
+    .host-bio p { margin: 0 0 12px; }
+
+    /* Amenity-style skills */
+    .amenities { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; }
+    .amenity { display: flex; align-items: center; gap: 16px; font-size: 16px; }
+    .outline-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 28px;
+      padding: 13px 22px; border: 1px solid var(--text); border-radius: 8px;
+      background: transparent; color: var(--text); font: inherit; font-weight: 600; font-size: 15px; cursor: pointer; text-decoration: none;
     }
-    .btn:hover { filter: brightness(1.08); }
+    .outline-btn:hover { background: var(--bg-soft); }
 
-    /* Stats */
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
-    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; box-shadow: var(--shadow); }
-    .stat b { display: block; font-family: Fraunces, Georgia, serif; font-size: 32px; font-weight: 600; line-height: 1.1; color: var(--accent); }
-    .stat span { font-size: 14px; color: var(--muted); }
-
-    /* Sections */
-    section { padding: 56px 0; border-top: 1px solid var(--line); }
-    h2 { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 30px; letter-spacing: -.01em; margin: 0 0 28px; }
-    .about p { font-size: 18px; max-width: 700px; margin: 0 0 16px; }
-
-    /* Experience timeline */
-    .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
-    .timeline::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
-    .role { position: relative; padding-left: 36px; margin-bottom: 36px; }
-    .role:last-child { margin-bottom: 0; }
-    .role::before {
-      content: ""; position: absolute; left: 0; top: 6px;
-      width: 16px; height: 16px; border-radius: 50%;
-      background: var(--bg); border: 3px solid var(--accent);
+    /* Sticky contact card (like a booking card) */
+    aside .sticky { position: sticky; top: 176px; }
+    .book { border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--card-shadow); padding: 24px; background: var(--surface); }
+    .book-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 20px; }
+    .book-head b { font-size: 22px; font-weight: 700; }
+    .book-head span { font-size: 14px; }
+    .book-grid { border: 1px solid var(--muted); border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+    .book-grid .row { display: grid; grid-template-columns: 1fr 1fr; }
+    .book-grid .cell { padding: 10px 12px; }
+    .book-grid .row + .row { border-top: 1px solid var(--muted); }
+    .book-grid .row .cell + .cell { border-left: 1px solid var(--muted); }
+    .book-grid .full { grid-column: span 2; }
+    .book-grid label { display: block; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; }
+    .book-grid div div { font-size: 14px; }
+    .cta {
+      display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+      padding: 14px 24px; border-radius: 8px; border: 0;
+      background: var(--accent-grad); color: #fff;
+      font: inherit; font-weight: 600; font-size: 16px; text-decoration: none; cursor: pointer;
+      transition: transform .1s;
     }
-    .role.current::before { background: var(--accent); }
-    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow); }
-    .role-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; align-items: baseline; }
-    .role h3 { font-size: 18px; font-weight: 600; margin: 0; }
-    .dates { font-size: 14px; color: var(--muted); white-space: nowrap; }
-    .company { color: var(--accent); font-weight: 500; margin: 2px 0 14px; font-size: 15px; }
-    .company small { color: var(--muted); font-weight: 400; }
-    .role ul { margin: 0; padding-left: 18px; }
-    .role li { margin-bottom: 8px; color: var(--text); }
-    .role li:last-child { margin-bottom: 0; }
-    .role li strong { font-weight: 600; }
-    .sub { margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--line); }
+    .cta:active { transform: scale(.98); }
+    .book-note { text-align: center; font-size: 14px; color: var(--muted); margin: 12px 0 0; }
+    .book-lines { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); display: grid; gap: 10px; font-size: 15px; }
+    .book-lines div { display: flex; justify-content: space-between; gap: 12px; }
+    .book-lines u { text-underline-offset: 3px; }
 
-    /* Skills */
-    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
-    .skill { padding: 9px 16px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; font-size: 15px; }
+    /* Listing-card grid (experience) */
+    .listings { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 24px; }
+    .listing { display: flex; flex-direction: column; justify-content: flex-start; cursor: pointer; text-align: left; background: none; border: 0; padding: 0; font: inherit; color: inherit; }
+    .listing:focus-visible { outline: 2px solid var(--text); outline-offset: 4px; border-radius: 14px; }
+    .cover { position: relative; aspect-ratio: 20 / 19; border-radius: 14px; overflow: hidden; margin-bottom: 12px; display: grid; place-items: center; color: #fff; }
+    .cover .mono { font-size: 54px; font-weight: 800; letter-spacing: -.04em; opacity: .95; transition: transform .3s; }
+    .listing:hover .cover .mono { transform: scale(1.08); }
+    .cover::after { content: ""; position: absolute; left: -30%; bottom: -45%; width: 90%; aspect-ratio: 1; border-radius: 50%; background: rgba(255, 255, 255, .12); }
+    .badge { position: absolute; top: 12px; left: 12px; z-index: 1; background: #fff; color: #222; font-size: 13px; font-weight: 700; padding: 5px 11px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0, 0, 0, .18); }
+    .heart { position: absolute; top: 12px; right: 12px; z-index: 1; color: #fff; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .35)); }
+    .heart svg { fill: rgba(0, 0, 0, .35); stroke-width: 2; }
+    .listing.current .heart svg { fill: var(--accent); stroke: #fff; }
+    .l-top { display: flex; justify-content: space-between; gap: 8px; font-size: 15px; font-weight: 600; }
+    .l-top span { font-weight: 400; white-space: nowrap; }
+    .listing p { margin: 2px 0 0; font-size: 15px; color: var(--muted); line-height: 1.4; }
+    .listing p.time { color: var(--text); margin-top: 6px; }
+    .listing p.time u { text-underline-offset: 3px; font-weight: 600; }
 
-    /* Education */
-    .edu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .edu h3 { font-size: 17px; margin: 0 0 4px; }
-    .edu p { margin: 0; color: var(--muted); font-size: 15px; }
-    .edu .dates { display: block; margin-top: 10px; }
+    /* Detail dialog */
+    dialog {
+      width: min(680px, calc(100vw - 32px)); max-height: calc(100vh - 64px);
+      border: 0; border-radius: 16px; padding: 0; background: var(--surface); color: var(--text);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .28);
+    }
+    dialog::backdrop { background: rgba(0, 0, 0, .5); }
+    .dlg-head { position: sticky; top: 0; display: flex; align-items: center; gap: 12px; padding: 16px 24px; border-bottom: 1px solid var(--line); background: var(--surface); }
+    .dlg-head h3 { margin: 0; font-size: 16px; font-weight: 700; flex: 1; text-align: center; padding-right: 36px; }
+    .close { width: 36px; height: 36px; border-radius: 50%; border: 0; background: none; color: var(--text); display: grid; place-items: center; cursor: pointer; }
+    .close:hover { background: var(--bg-soft); }
+    .close svg { width: 16px; height: 16px; stroke-width: 2.4; }
+    .dlg-body { padding: 24px 32px 32px; }
+    .dlg-body h4 { font-size: 22px; margin: 0 0 4px; letter-spacing: -.01em; }
+    .dlg-body .meta { color: var(--muted); margin: 0 0 20px; font-size: 15px; }
+    .dlg-body .item { display: flex; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line-soft); }
+    .dlg-body .item b { display: block; font-weight: 600; margin-bottom: 2px; }
+    .dlg-body .item p { margin: 0; color: var(--muted); font-size: 15px; }
+    .dlg-body .sub-role { margin-top: 28px; }
 
-    /* Contact */
-    .contact p { font-size: 18px; max-width: 600px; margin: 0 0 24px; color: var(--muted); }
-    footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+    /* Education (like "where you'll sleep") */
+    .rooms { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 640px; }
+    .room { border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
+    .room svg { width: 30px; height: 30px; margin-bottom: 14px; }
+    .room h3 { font-size: 16px; font-weight: 600; margin: 0 0 4px; }
+    .room p { margin: 0; font-size: 14px; color: var(--muted); }
 
+    /* Full-width sections */
+    .section { padding: 48px 0; border-top: 1px solid var(--line); }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 24px; }
+    .section-head h2 { margin: 0; }
+
+    /* Footer */
+    footer { background: var(--bg-soft); border-top: 1px solid var(--line); margin-top: 48px; }
+    .foot-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 48px 0 32px; }
+    .foot-cols h4 { font-size: 14px; font-weight: 700; margin: 0 0 12px; }
+    .foot-cols a, .foot-cols span { display: block; font-size: 14px; margin-bottom: 10px; text-decoration: none; }
+    .foot-cols a:hover { text-decoration: underline; }
+    .foot-bottom { border-top: 1px solid var(--line); padding: 24px 0; font-size: 14px; color: var(--text); }
+
+    /* Mobile bottom bar (like the mobile reserve bar) */
+    .mobile-bar { display: none; }
+
+    @media (max-width: 1040px) {
+      .listings { grid-template-columns: repeat(2, 1fr); }
+      .layout { gap: 48px; grid-template-columns: minmax(0, 1fr) 320px; }
+    }
+    @media (max-width: 840px) {
+      html { scroll-padding-top: 140px; }
+      .search { display: none; }
+      .topbar .wrap { height: 68px; }
+      .cats { top: 68px; }
+      aside { display: none; }
+      .layout { grid-template-columns: 1fr; }
+      .mobile-bar {
+        display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+        align-items: center; justify-content: space-between; gap: 16px;
+        padding: 14px 16px; background: var(--surface); border-top: 1px solid var(--line);
+      }
+      .mobile-bar div { font-size: 14px; line-height: 1.3; }
+      .mobile-bar b { font-size: 15px; }
+      .mobile-bar .cta { width: auto; padding: 12px 22px; }
+      footer { padding-bottom: 80px; }
+    }
     @media (max-width: 640px) {
-      .links { display: none; }
-      header.hero { padding: 56px 0 40px; }
-      .hero-top { flex-direction: column-reverse; align-items: flex-start; gap: 24px; }
-      .avatar { width: 112px; height: 112px; }
-      .stats, .edu { grid-template-columns: 1fr; }
-      .card { padding: 18px; }
-      .role { padding-left: 30px; }
+      .wrap { padding: 0 16px; }
+      .profile-pill span { display: none; }
+      .profile-pill { padding: 4px; }
+      .cats .wrap { gap: 28px; }
+      .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto 130px 130px; border-radius: 12px; }
+      .tile.main { grid-column: span 2; grid-row: auto; padding: 24px; min-height: 220px; }
+      .tile b { font-size: 26px; }
+      .tile span { font-size: 13px; }
+      .amenities { grid-template-columns: 1fr; }
+      .listings { grid-template-columns: 1fr; gap: 32px; }
+      .hint { display: none; }
+      .rooms { grid-template-columns: 1fr; }
+      .host-card { grid-template-columns: 1fr 92px; padding: 24px 18px; }
+      .dlg-body { padding: 20px; }
+      .foot-cols { grid-template-columns: 1fr; gap: 8px; }
     }
   </style>
 </head>
 <body>
-  <nav>
+  <!-- Icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c2 2 10 2 12 0v-5M22 9v6"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5 6.5-5s5.5 1.5 6.5 5"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.3 0 4 1.3 4.7 4"/></symbol>
+    <symbol id="i-cycle" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-14.3 4.9M4 12a8 8 0 0 1 14.3-4.9"/><path d="M18.5 3v4.5H14M5.5 21v-4.5H10"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M14 4c3-1 6-1 6-1s0 3-1 6l-6 6-4-4z"/><path d="M9 11l-4 1-2 3 4 1M13 15l-1 4-3 2-1-4"/><circle cx="15.5" cy="8.5" r="1.3"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 20h18"/><rect x="5" y="11" width="3" height="6" rx="1"/><rect x="10.5" y="7" width="3" height="10" rx="1"/><rect x="16" y="4" width="3" height="13" rx="1"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21a2 2 0 0 1 2-2h13v2z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9-9.5C2 7 4.5 4 7.6 4c2 0 3.4 1.1 4.4 2.6C13 5.1 14.4 4 16.4 4 19.5 4 22 7 21 10.5 19.5 15.4 12 20 12 20z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-in" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-7M12 13c0-2 1.3-3 2.7-3S17 11 17 13v4"/></symbol>
+  </svg>
+
+  <header class="topbar">
     <div class="wrap">
-      <a class="brand" href="#top">Einav David</a>
-      <ul class="links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+      <a class="logo" href="#top"><span class="logo-mark">ED</span>einav</a>
+      <nav class="search" aria-label="Sections">
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a class="go" href="#experience" aria-label="Jump to experience"><svg class="i"><use href="#i-search"/></svg></a>
+      </nav>
+      <a class="profile-pill" href="https://www.linkedin.com/in/einav-david-7b9911208/" target="_blank" rel="noopener">
+        <span>Connect</span>
+        <img src="profile.png" alt="">
+      </a>
+    </div>
+  </header>
+
+  <nav class="cats" aria-label="Page sections">
+    <div class="wrap">
+      <a class="cat active" href="#about"><svg class="i"><use href="#i-user"/></svg>About</a>
+      <a class="cat" href="#highlights"><svg class="i"><use href="#i-spark"/></svg>Highlights</a>
+      <a class="cat" href="#skills"><svg class="i"><use href="#i-layers"/></svg>Skills</a>
+      <a class="cat" href="#experience"><svg class="i"><use href="#i-brief"/></svg>Experience</a>
+      <a class="cat" href="#education"><svg class="i"><use href="#i-cap"/></svg>Education</a>
+      <a class="cat" href="#contact"><svg class="i"><use href="#i-chat"/></svg>Contact</a>
     </div>
   </nav>
 
   <main id="top">
-    <header class="hero">
-      <div class="wrap">
-        <div class="hero-top">
+    <div class="wrap">
+      <div class="title-row">
+        <h1>Einav David · ServiceNow Platform Manager</h1>
+        <div class="subline">
+          <span><span class="star">★</span> <b>Project &amp; Product Lead</b></span>
+          <span class="dot">·</span>
+          <u>Digital Transformation</u>
+          <span class="dot">·</span>
+          <span>MBA</span>
+          <span class="dot">·</span>
+          <u>Kfar Saba, Israel</u>
+        </div>
+      </div>
+
+      <div class="gallery" aria-label="Career at a glance">
+        <div class="tile main">
+          <div class="quote">I turn business needs into enterprise platforms people rely on.</div>
+          <span>ServiceNow · Product · Delivery</span>
+        </div>
+        <div class="tile t1"><b>18+</b><span>years in enterprise IT</span></div>
+        <div class="tile t2"><b>10+</b><span>years on ServiceNow &amp; ITSM</span></div>
+        <div class="tile t3"><b>4</b><span>leadership roles</span></div>
+        <div class="tile t4"><b>MBA</b><span>The Open University</span></div>
+      </div>
+
+      <div class="layout">
         <div>
-        <p class="eyebrow">ServiceNow · Product · Digital Transformation</p>
-        <h1>Einav David</h1>
-        <p class="tagline">ServiceNow Platform Manager and Project &amp; Product Lead. For close to 20 years I have turned business needs into enterprise platforms that people rely on.</p>
-        <div class="meta">
-          <span class="chip">📍 Kfar Saba, Israel</span>
-          <span class="chip">💼 Palo Alto Networks</span>
-          <span class="chip">🎓 MBA</span>
-        </div>
-        <a class="btn" href="https://www.linkedin.com/in/einav-david-7b9911208/" target="_blank" rel="noopener">Connect on LinkedIn →</a>
-        </div>
-        <img class="avatar" src="profile.png" alt="Portrait of Einav David" width="184" height="184">
-        </div>
-
-        <div class="stats">
-          <div class="stat"><b>18+</b><span>years in enterprise IT</span></div>
-          <div class="stat"><b>10+</b><span>years on ServiceNow &amp; ITSM</span></div>
-          <div class="stat"><b>4</b><span>leadership roles across 4 companies</span></div>
-        </div>
-      </div>
-    </header>
-
-    <section id="about" class="about">
-      <div class="wrap">
-        <h2>About</h2>
-        <p>I lead the ServiceNow platform at Palo Alto Networks, following the CyberArk acquisition. I own the platform roadmap and run a cross-functional team of developers, project managers and system analysts, keeping the platform aligned with executive priorities.</p>
-        <p>I started out leading an IT operations team, then spent years as a systems analyst and IT project manager, and later worked as a Product Owner running Agile delivery. Across all of these roles I have bridged business and technology, which means good governance, clear specifications and releases that ship without disruption.</p>
-      </div>
-    </section>
-
-    <section id="experience">
-      <div class="wrap">
-        <h2>Experience</h2>
-        <ol class="timeline">
-          <li class="role current">
-            <div class="card">
-              <div class="role-head">
-                <h3>ServiceNow Platform Manager / Team Leader</h3>
-                <span class="dates">Sep 2022 – Present</span>
-              </div>
-              <p class="company">Palo Alto Networks <small>· CyberArk (acquired by Palo Alto Networks) · Israel</small></p>
-              <ul>
-                <li><strong>Platform Strategy &amp; Roadmap:</strong> Own the end-to-end ServiceNow roadmap, aligning platform capabilities with executive business priorities.</li>
-                <li><strong>Team Leadership &amp; Velocity:</strong> Lead and mentor a cross-functional team of developers, project managers and system analysts, and set delivery velocity and SLA benchmarks.</li>
-                <li><strong>Governance &amp; Architecture:</strong> Enforce platform governance, architectural standards and security controls to keep the platform highly available and compliant.</li>
-                <li><strong>Digital Transformation:</strong> Partner with executive stakeholders to drive platform adoption, automate critical workflows and run upgrade cycles with zero business disruption.</li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="role">
-            <div class="card">
-              <div class="role-head">
-                <h3>Product Owner</h3>
-                <span class="dates">Jan 2019 – Sep 2022</span>
-              </div>
-              <p class="company">Amdocs <small>· Israel</small></p>
-              <ul>
-                <li><strong>End-to-End Product Management:</strong> Managed full product lifecycles with Agile, from concept to delivery, including requirements gathering, prioritization, timelines and budget.</li>
-                <li><strong>Scrum Leadership:</strong> Led an 8-person Scrum team and ran demos, design reviews and planning sessions to deliver as much customer value as possible.</li>
-                <li><strong>Customer Advisory &amp; Requirements:</strong> Translated business needs into functional and technical specifications, and advised clients on best practices and reusing components.</li>
-                <li><strong>Portfolio Ownership:</strong> Managed several projects at once while staying within specifications and budget limits.</li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="role">
-            <div class="card">
-              <div class="role-head">
-                <h3>Comverse</h3>
-                <span class="dates">Oct 2007 – Oct 2018 · 11 yrs</span>
-              </div>
-              <p class="company">Israel</p>
-
-              <div class="role-head">
-                <h3>IT Project Manager / Systems Analyst</h3>
-                <span class="dates">Oct 2011 – Oct 2018</span>
-              </div>
-              <ul style="margin-top:12px">
-                <li><strong>Platform Implementation &amp; Support:</strong> Implemented and maintained the enterprise ServiceNow platform and BMC Remedy ITSM, including data analysis, complex bug fixing and ongoing performance tuning.</li>
-                <li><strong>Functional Design &amp; Architecture:</strong> Wrote detailed functional designs and technical specifications for development and QA teams, connecting business needs with technical delivery.</li>
-                <li><strong>Full-Lifecycle Release Management:</strong> Planned and governed releases from start to finish: gathering requirements, defining solutions, tracking development, guiding QA and ensuring smooth production launches.</li>
-              </ul>
-
-              <div class="sub">
-                <div class="role-head">
-                  <h3>Telephony Help Desk Team Lead &amp; Project Manager</h3>
-                  <span class="dates">Oct 2007 – Oct 2011</span>
-                </div>
-                <ul style="margin-top:12px">
-                  <li><strong>Technical Team Leadership:</strong> Led the corporate IT operations team and kept technical support, employee training and day-to-day operations running smoothly across global offices.</li>
-                  <li><strong>Infrastructure &amp; Telecom Management:</strong> Managed corporate IT infrastructure and telecom operations, including global telephony systems, network connectivity and cellular provider integrations.</li>
-                </ul>
-              </div>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section id="skills">
-      <div class="wrap">
-        <h2>Skills</h2>
-        <div class="skills">
-          <span class="skill">ServiceNow</span>
-          <span class="skill">BMC Remedy ITSM</span>
-          <span class="skill">Platform Governance</span>
-          <span class="skill">Digital Transformation</span>
-          <span class="skill">Product Management</span>
-          <span class="skill">Release Management</span>
-          <span class="skill">Team Leadership</span>
-          <span class="skill">Agile Methodologies</span>
-          <span class="skill">Scrum</span>
-          <span class="skill">Systems Analysis</span>
-          <span class="skill">Business Analysis</span>
-          <span class="skill">Management</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="education">
-      <div class="wrap">
-        <h2>Education</h2>
-        <div class="edu">
-          <div class="card">
-            <h3>The Open University of Israel</h3>
-            <p>Master of Business Administration (MBA), Business Administration and Management</p>
-            <span class="dates">2006 – 2009</span>
+          <div class="block" id="about">
+            <p class="lead">Platform leader at Palo Alto Networks</p>
+            <p class="muted" style="margin:0">ServiceNow roadmap · Cross-functional team · Governance &amp; architecture</p>
           </div>
-          <div class="card">
+
+          <div class="block" id="highlights">
+            <div class="highlights">
+              <div class="hl"><svg class="i"><use href="#i-map"/></svg><div><h3>Owns the platform roadmap</h3><p>Aligns ServiceNow capabilities with executive business priorities, end to end.</p></div></div>
+              <div class="hl"><svg class="i"><use href="#i-users"/></svg><div><h3>Builds and leads teams</h3><p>Mentors developers, project managers and system analysts, and sets velocity and SLA benchmarks.</p></div></div>
+              <div class="hl"><svg class="i"><use href="#i-cycle"/></svg><div><h3>Upgrades with zero disruption</h3><p>Runs upgrade cycles and workflow automation without interrupting the business.</p></div></div>
+            </div>
+          </div>
+
+          <div class="block">
+            <h2>Meet Einav</h2>
+            <div class="host">
+              <div class="host-card">
+                <div class="host-id">
+                  <div class="host-photo">
+                    <img src="profile.png" alt="Portrait of Einav David" width="104" height="104">
+                    <span class="verified" title="Verified"><svg class="i"><use href="#i-check"/></svg></span>
+                  </div>
+                  <strong>Einav</strong>
+                  <small><svg class="i" style="width:14px;height:14px"><use href="#i-shield"/></svg>Platform Manager</small>
+                </div>
+                <div class="host-stats">
+                  <div><b>18+</b><span>Years in IT</span></div>
+                  <div><b>4</b><span>Companies</span></div>
+                  <div><b>2</b><span>Degrees</span></div>
+                </div>
+              </div>
+              <div class="host-bio">
+                <ul class="host-facts">
+                  <li><svg class="i"><use href="#i-brief"/></svg>My work: ServiceNow Platform Manager</li>
+                  <li><svg class="i"><use href="#i-cap"/></svg>Where I studied: The Open University of Israel</li>
+                  <li><svg class="i"><use href="#i-pin"/></svg>Lives in Kfar Saba, Israel</li>
+                </ul>
+                <p>I lead the ServiceNow platform at Palo Alto Networks, following the CyberArk acquisition. I own the platform roadmap and run a cross-functional team of developers, project managers and system analysts, keeping the platform aligned with executive priorities.</p>
+                <p>I started out leading an IT operations team, then spent years as a systems analyst and IT project manager, and later worked as a Product Owner running Agile delivery. Across all of these roles I have bridged business and technology, which means good governance, clear specifications and releases that ship without disruption.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="block" id="skills">
+            <h2>What I bring</h2>
+            <div class="amenities">
+              <div class="amenity"><svg class="i"><use href="#i-layers"/></svg>ServiceNow</div>
+              <div class="amenity"><svg class="i"><use href="#i-gear"/></svg>BMC Remedy ITSM</div>
+              <div class="amenity"><svg class="i"><use href="#i-shield"/></svg>Platform Governance</div>
+              <div class="amenity"><svg class="i"><use href="#i-rocket"/></svg>Digital Transformation</div>
+              <div class="amenity"><svg class="i"><use href="#i-target"/></svg>Product Management</div>
+              <div class="amenity"><svg class="i"><use href="#i-flag"/></svg>Release Management</div>
+              <div class="amenity"><svg class="i"><use href="#i-users"/></svg>Team Leadership</div>
+              <div class="amenity"><svg class="i"><use href="#i-cycle"/></svg>Agile Methodologies</div>
+              <div class="amenity"><svg class="i"><use href="#i-spark"/></svg>Scrum</div>
+              <div class="amenity"><svg class="i"><use href="#i-doc"/></svg>Systems Analysis</div>
+              <div class="amenity"><svg class="i"><use href="#i-chart"/></svg>Business Analysis</div>
+              <div class="amenity"><svg class="i"><use href="#i-brief"/></svg>Management</div>
+            </div>
+          </div>
+        </div>
+
+        <aside>
+          <div class="sticky">
+            <div class="book">
+              <div class="book-head">
+                <b>Let's talk</b>
+                <span class="muted">ServiceNow &amp; product</span>
+              </div>
+              <div class="book-grid">
+                <div class="row">
+                  <div class="cell"><label>Current</label><div>Palo Alto Networks</div></div>
+                  <div class="cell"><label>Based in</label><div>Kfar Saba, IL</div></div>
+                </div>
+                <div class="row">
+                  <div class="cell full"><label>Focus</label><div>Platform strategy · Product · Delivery</div></div>
+                </div>
+              </div>
+              <a class="cta" href="https://www.linkedin.com/in/einav-david-7b9911208/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+              <p class="book-note">Opens LinkedIn in a new tab</p>
+              <div class="book-lines">
+                <div><u>Experience</u><span>18+ years</span></div>
+                <div><u>ServiceNow &amp; ITSM</u><span>10+ years</span></div>
+                <div><u>Education</u><span>MBA · BA</span></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <section class="section" id="experience">
+        <div class="section-head">
+          <h2>Where I've worked</h2>
+          <span class="muted hint" style="font-size:14px">Select a role for details</span>
+        </div>
+        <div class="listings">
+          <button class="listing current" data-dialog="d-pan">
+            <div class="cover" style="background:linear-gradient(135deg,#ff5a5f,#d70466)">
+              <span class="badge">Current role</span>
+              <span class="heart"><svg class="i"><use href="#i-heart"/></svg></span>
+              <span class="mono">PA</span>
+            </div>
+            <div class="l-top">Palo Alto Networks<span>★ Now</span></div>
+            <p>ServiceNow Platform Manager / Team Leader</p>
+            <p class="time"><u>Sep 2022 – Present</u></p>
+          </button>
+
+          <button class="listing" data-dialog="d-amdocs">
+            <div class="cover" style="background:linear-gradient(135deg,#3b6bd6,#2a2a72)">
+              <span class="heart"><svg class="i"><use href="#i-heart"/></svg></span>
+              <span class="mono">AM</span>
+            </div>
+            <div class="l-top">Amdocs<span>3 yrs 9 mo</span></div>
+            <p>Product Owner</p>
+            <p class="time"><u>Jan 2019 – Sep 2022</u></p>
+          </button>
+
+          <button class="listing" data-dialog="d-comverse">
+            <div class="cover" style="background:linear-gradient(135deg,#00a699,#007a87)">
+              <span class="heart"><svg class="i"><use href="#i-heart"/></svg></span>
+              <span class="mono">CV</span>
+            </div>
+            <div class="l-top">Comverse<span>7 yrs 1 mo</span></div>
+            <p>IT Project Manager / Systems Analyst</p>
+            <p class="time"><u>Oct 2011 – Oct 2018</u></p>
+          </button>
+
+          <button class="listing" data-dialog="d-comverse">
+            <div class="cover" style="background:linear-gradient(135deg,#fc642d,#c13515)">
+              <span class="heart"><svg class="i"><use href="#i-heart"/></svg></span>
+              <span class="mono">CV</span>
+            </div>
+            <div class="l-top">Comverse<span>4 yrs 1 mo</span></div>
+            <p>Telephony Help Desk Team Lead &amp; PM</p>
+            <p class="time"><u>Oct 2007 – Oct 2011</u></p>
+          </button>
+        </div>
+      </section>
+
+      <section class="section" id="education">
+        <h2>Where I studied</h2>
+        <div class="rooms">
+          <div class="room">
+            <svg class="i"><use href="#i-cap"/></svg>
+            <h3>The Open University of Israel</h3>
+            <p>MBA, Business Administration and Management</p>
+            <p>2006 – 2009</p>
+          </div>
+          <div class="room">
+            <svg class="i"><use href="#i-book"/></svg>
             <h3>Ruppin Academic Center</h3>
             <p>BA in Behavioral Sciences</p>
-            <span class="dates">2004 – 2007</span>
+            <p>2004 – 2007</p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="contact" class="contact">
-      <div class="wrap">
+      <section class="section" id="contact">
         <h2>Let's connect</h2>
-        <p>Happy to talk about ServiceNow platform strategy, product and project leadership, or digital transformation.</p>
-        <a class="btn" href="https://www.linkedin.com/in/einav-david-7b9911208/" target="_blank" rel="noopener">Message me on LinkedIn →</a>
-      </div>
-    </section>
+        <p class="muted" style="max-width:600px;margin:0 0 24px;font-size:17px">Happy to talk about ServiceNow platform strategy, product and project leadership, or digital transformation.</p>
+        <a class="outline-btn" style="margin-top:0" href="https://www.linkedin.com/in/einav-david-7b9911208/" target="_blank" rel="noopener"><svg class="i" style="width:18px;height:18px"><use href="#i-in"/></svg>Message me on LinkedIn</a>
+      </section>
+    </div>
   </main>
 
+  <!-- Role details -->
+  <dialog id="d-pan" aria-labelledby="d-pan-t">
+    <div class="dlg-head"><button class="close" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button><h3 id="d-pan-t">Role details</h3></div>
+    <div class="dlg-body">
+      <h4>ServiceNow Platform Manager / Team Leader</h4>
+      <p class="meta">Palo Alto Networks · CyberArk (acquired by Palo Alto Networks) · Sep 2022 – Present · Israel</p>
+      <div class="item"><svg class="i"><use href="#i-map"/></svg><div><b>Platform Strategy &amp; Roadmap</b><p>Own the end-to-end ServiceNow roadmap, aligning platform capabilities with executive business priorities.</p></div></div>
+      <div class="item"><svg class="i"><use href="#i-users"/></svg><div><b>Team Leadership &amp; Velocity</b><p>Lead and mentor a cross-functional team of developers, project managers and system analysts, and set delivery velocity and SLA benchmarks.</p></div></div>
+      <div class="item"><svg class="i"><use href="#i-shield"/></svg><div><b>Governance &amp; Architecture</b><p>Enforce platform governance, architectural standards and security controls to keep the platform highly available and compliant.</p></div></div>
+      <div class="item"><svg class="i"><use href="#i-rocket"/></svg><div><b>Digital Transformation</b><p>Partner with executive stakeholders to drive platform adoption, automate critical workflows and run upgrade cycles with zero business disruption.</p></div></div>
+    </div>
+  </dialog>
+
+  <dialog id="d-amdocs" aria-labelledby="d-amdocs-t">
+    <div class="dlg-head"><button class="close" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button><h3 id="d-amdocs-t">Role details</h3></div>
+    <div class="dlg-body">
+      <h4>Product Owner</h4>
+      <p class="meta">Amdocs · Jan 2019 – Sep 2022 · Israel</p>
+      <div class="item"><svg class="i"><use href="#i-target"/></svg><div><b>End-to-End Product Management</b><p>Managed full product lifecycles with Agile, from concept to delivery, including requirements gathering, prioritization, timelines and budget.</p></div></div>
+      <div class="item"><svg class="i"><use href="#i-cycle"/></svg><div><b>Scrum Leadership</b><p>Led an 8-person Scrum team and ran demos, design reviews and planning sessions to deliver as much customer value as possible.</p></div></div>
+      <div class="item"><svg class="i"><use href="#i-doc"/></svg><div><b>Customer Advisory &amp; Requirements</b><p>Translated business needs into functional and technical specifications, and advised clients on best practices and reusing components.</p></div></div>
+      <div class="item"><svg class="i"><use href="#i-chart"/></svg><div><b>Portfolio Ownership</b><p>Managed several projects at once while staying within specifications and budget limits.</p></div></div>
+    </div>
+  </dialog>
+
+  <dialog id="d-comverse" aria-labelledby="d-comverse-t">
+    <div class="dlg-head"><button class="close" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button><h3 id="d-comverse-t">Comverse · 11 years</h3></div>
+    <div class="dlg-body">
+      <h4>IT Project Manager / Systems Analyst</h4>
+      <p class="meta">Oct 2011 – Oct 2018 · Israel</p>
+      <div class="item"><svg class="i"><use href="#i-layers"/></svg><div><b>Platform Implementation &amp; Support</b><p>Implemented and maintained the enterprise ServiceNow platform and BMC Remedy ITSM, including data analysis, complex bug fixing and ongoing performance tuning.</p></div></div>
+      <div class="item"><svg class="i"><use href="#i-doc"/></svg><div><b>Functional Design &amp; Architecture</b><p>Wrote detailed functional designs and technical specifications for development and QA teams, connecting business needs with technical delivery.</p></div></div>
+      <div class="item"><svg class="i"><use href="#i-flag"/></svg><div><b>Full-Lifecycle Release Management</b><p>Planned and governed releases from start to finish: gathering requirements, defining solutions, tracking development, guiding QA and ensuring smooth production launches.</p></div></div>
+
+      <div class="sub-role">
+        <h4>Telephony Help Desk Team Lead &amp; Project Manager</h4>
+        <p class="meta">Oct 2007 – Oct 2011 · Israel</p>
+        <div class="item"><svg class="i"><use href="#i-users"/></svg><div><b>Technical Team Leadership</b><p>Led the corporate IT operations team and kept technical support, employee training and day-to-day operations running smoothly across global offices.</p></div></div>
+        <div class="item"><svg class="i"><use href="#i-phone"/></svg><div><b>Infrastructure &amp; Telecom Management</b><p>Managed corporate IT infrastructure and telecom operations, including global telephony systems, network connectivity and cellular provider integrations.</p></div></div>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="mobile-bar">
+    <div><b>Einav David</b><br><span class="muted">ServiceNow Platform Manager</span></div>
+    <a class="cta" href="https://www.linkedin.com/in/einav-david-7b9911208/" target="_blank" rel="noopener">Connect</a>
+  </div>
+
   <footer>
-    <div class="wrap">© 2026 Einav David</div>
+    <div class="wrap">
+      <div class="foot-cols">
+        <div>
+          <h4>Explore</h4>
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+        </div>
+        <div>
+          <h4>Background</h4>
+          <a href="#education">Education</a>
+          <span class="muted">Kfar Saba, Israel</span>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <a href="https://www.linkedin.com/in/einav-david-7b9911208/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="foot-bottom">© 2026 Einav David</div>
+    </div>
   </footer>
+
+  <script>
+    // Role detail dialogs
+    document.querySelectorAll('[data-dialog]').forEach(btn => {
+      btn.addEventListener('click', () => document.getElementById(btn.dataset.dialog).showModal());
+    });
+    document.querySelectorAll('dialog').forEach(dlg => {
+      dlg.querySelector('.close').addEventListener('click', () => dlg.close());
+      dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+    });
+
+    // Highlight the category tab for the section in view
+    const tabs = [...document.querySelectorAll('.cat')];
+    const targets = tabs.map(t => document.querySelector(t.getAttribute('href')));
+    const setActive = () => {
+      const y = window.scrollY + 170;
+      let idx = 0;
+      targets.forEach((el, i) => { if (el && el.getBoundingClientRect().top + window.scrollY <= y) idx = i; });
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) idx = tabs.length - 1;
+      tabs.forEach((t, i) => t.classList.toggle('active', i === idx));
+    };
+    window.addEventListener('scroll', setActive, { passive: true });
+    setActive();
+  </script>
 </body>
 </html>
